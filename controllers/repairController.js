@@ -15,7 +15,7 @@ const getAllRepairs = async (req, res) => {
 const getRepairById = async (req, res) => {
   try {
     const { repair } = req;
-
+   
     res.status(200).json({
       repair,
     });
