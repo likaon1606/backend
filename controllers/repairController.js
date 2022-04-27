@@ -15,7 +15,7 @@ const getAllRepairs = async (req, res) => {
 const getRepairById = async (req, res) => {
   try {
     const { repair } = req;
-   
+
     res.status(200).json({
       repair,
     });
@@ -59,4 +59,10 @@ const deleteRepair = async (req, res) => {
   }
 };
 
-module.exports = { getAllRepairs, createRepair, getRepairById, updateRepair, deleteRepair };
+module.exports = {
+  getAllRepairs,
+  createRepair,
+  getRepairById,
+  updateRepair,
+  deleteRepair,
+};
