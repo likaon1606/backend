@@ -1,0 +1,19 @@
+{
+  "name": "app.js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "author": "ariel.fuentesgarcia@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.3",
+    "pg": "^8.7.3",
+    "sequelize": "^6.19.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
