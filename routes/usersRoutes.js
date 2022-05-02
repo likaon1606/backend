@@ -1,5 +1,5 @@
-const express = require('express');
-const { body } = require('express-validator')
+const express = require("express");
+const { body } = require("express-validator");
 
 //MIDDLEWARES
 const { userExists } = require("../middlewares/usersMiddlewares");
@@ -17,21 +17,21 @@ const router = express.Router();
 
 router.get("/", getAllUsers);
 
-router.post("/", 
-body('name')
-  .notEmpty()
-  .withMessage('Name must not be empty'),
-body('email')
-  .notEmpty()
-  .withMessage('Email must not be empty')
-  .isEmail()
-  .withMessage('Email invalid, make sure it is an email'),
-body('password')
-  .notEmpty()
-  .withMessage('Password must not be empty')
-  .isLength({ min: 8 })
-  .withMessage('must contain at least 8 characters long'),     
-createUser);
+router.post(
+  "/",
+  body("name").notEmpty().withMessage("Name must not be empty"),
+  body("email")
+    .notEmpty()
+    .withMessage("Email must not be empty")
+    .isEmail()
+    .withMessage("Email invalid, make sure it is an email"),
+  body("password")
+    .notEmpty()
+    .withMessage("Password must not be empty")
+    .isLength({ min: 8 })
+    .withMessage("must contain at least 8 characters long"),
+  createUser
+);
 
 // router.get('/:id', getUserById); //request id dinamic
 

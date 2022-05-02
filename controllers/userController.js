@@ -1,5 +1,5 @@
 const { User } = require("../models/userModel");
-const { validationResult } = require('express-validator');
+const { validationResult } = require("express-validator");
 
 const getAllUsers = async (req, res) => {
   try {
@@ -20,12 +20,12 @@ const createUser = async (req, res) => {
 
     const errors = validationResult(req);
 
-    if (!errors.isEmpty()){
+    if (!errors.isEmpty()) {
       const messages = errors.array().map(({ msg }) => msg);
-      const errorMsg = messages.join('. ');
+      const errorMsg = messages.join(". ");
 
       return res.status(400).json({
-        status: 'error',
+        status: "error",
         message: errorMsg,
       });
     }
@@ -62,7 +62,7 @@ const updateUser = async (req, res) => {
     // await User.update({ name }, { where: { id } }); ANOTHER METOD TO UPDATE
     // const user = await User.findOne({ where: { id } });
 
-    await user.update({ name, email, password,role }); //to update the name or any other
+    await user.update({ name, email, password, role }); //to update the name or any other
 
     res.status(200).json({ status: "success" });
   } catch (error) {

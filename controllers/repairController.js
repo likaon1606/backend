@@ -1,6 +1,6 @@
-const { Repair } = require('../models/repairsModel');
-const { User } = require('../models/userModel');
-const { validationResult } = require('express-validator')
+const { Repair } = require("../models/repairsModel");
+const { User } = require("../models/userModel");
+const { validationResult } = require("express-validator");
 
 const getAllRepairs = async (req, res) => {
   try {
@@ -33,17 +33,22 @@ const createRepair = async (req, res) => {
 
   const errors = validationResult(req);
 
-  if (!errors.isEmpty()){
+  if (!errors.isEmpty()) {
     const messages = errors.array().map(({ msg }) => msg);
-    const errorMsg = messages.join('. ');
+    const errorMsg = messages.join(". ");
 
     return res.status(400).json({
-      status: 'error',
+      status: "error",
       message: errorMsg,
     });
   }
 
-  const newRepair = await Repair.create({ date, computerNumber, comments, userId });
+  const newRepair = await Repair.create({
+    date,
+    computerNumber,
+    comments,
+    userId,
+  });
 
   res.status(201).json({ newRepair });
 };
