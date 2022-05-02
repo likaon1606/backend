@@ -1,8 +1,12 @@
-const { Repair } = require("../models/repairsModel");
+const { Repair } = require('../models/repairsModel');
+const { User } = require('../models/userModel');
+const { validationResult } = require('express-validator')
 
 const getAllRepairs = async (req, res) => {
   try {
-    const repairs = await Repair.findAll();
+    const repairs = await Repair.findAll({
+      include: [{ model: User }],
+    });
 
     res.status(200).json({
       repairs,
@@ -25,9 +29,21 @@ const getRepairById = async (req, res) => {
 };
 
 const createRepair = async (req, res) => {
-  const { date, userId } = req.body;
+  const { date, computerNumber, comments, userId } = req.body;
 
-  const newRepair = await Repair.create({ date, userId });
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()){
+    const messages = errors.array().map(({ msg }) => msg);
+    const errorMsg = messages.join('. ');
+
+    return res.status(400).json({
+      status: 'error',
+      message: errorMsg,
+    });
+  }
+
+  const newRepair = await Repair.create({ date, computerNumber, comments, userId });
 
   res.status(201).json({ newRepair });
 };
@@ -35,9 +51,9 @@ const createRepair = async (req, res) => {
 const updateRepair = async (req, res) => {
   try {
     const { repair } = req;
-    const { date, status } = req.body;
+    const { computerNumber, comments } = req.body;
 
-    await repair.update({ date, status });
+    await repair.update({ computerNumber, comments });
 
     res.status(200).json({ status: "success" });
   } catch (error) {
