@@ -1,5 +1,8 @@
 const express = require("express");
 
+// Controllers
+const { globalErrorHandler } = require('./controllers/errorsController');
+
 const { usersRouter } = require("./routes/usersRoutes");
 const { repairsRouter } = require("./routes/repairsRoutes");
 
@@ -19,6 +22,9 @@ app.use(express.json());
 //Enpoints
 app.use("/api/v1/users", usersRouter);
 app.use("/api/v1/repairs", repairsRouter);
+
+// Global error handler
+app.use('*', globalErrorHandler);
 
 //Authenticate db
 db.authenticate()
